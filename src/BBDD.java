@@ -2,6 +2,7 @@
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,10 +15,14 @@ import javax.swing.JOptionPane;
 public class BBDD {
 
     /**
-     * Atributos a los que invocaremos desde el proyecto una vez la librería
-     * esté creada
+     * Atributo al que invocaremos desde el proyecto una vez la librería
+     * esté creada que será la conexión realizada a la BBDD
      */
     public static Connection conexion;
+     /**
+     * Atributo al que que invocaremos desde el proyecto una vez la librería
+     * esté creada para realizar las consultas
+     */
     public static Statement st;
 
     /**
@@ -56,4 +61,5 @@ public class BBDD {
             Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+   
 }
