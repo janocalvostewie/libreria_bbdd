@@ -14,23 +14,25 @@ import javax.swing.JOptionPane;
 public class BBDD {
 
     /**
-     * Atributos a los que invocaremos desde el proyecto una vez la librería esté creada
+     * Atributos a los que invocaremos desde el proyecto una vez la librería
+     * esté creada
      */
     public static Connection conexion;
     public static Statement st;
-    
-    
+
     /**
-     * Este método gener la conexión a la base de datos a través de tres parámetros
-     * Si se realiza correctamente saldrá un mensaje de éxito, de lo contrario uno de fracaso.
-     * Con este método también inicializamos el atributo 'STATEMENT' que se empleará en las consultas.
+     * Este método gener la conexión a la base de datos a través de tres
+     * parámetros Si se realiza correctamente saldrá un mensaje de éxito, de lo
+     * contrario uno de fracaso. Con este método también inicializamos el
+     * atributo 'STATEMENT' que se empleará en las consultas.
+     *
      * @param dbName Nombre de la base de datos a la que queremos conectarnos
-     * @param user  Usuario que se empleará en la conexión
-     * @param pass  Contraseña del usuario
-     * @throws Exception 
+     * @param user Usuario que se empleará en la conexión
+     * @param pass Contraseña del usuario
+     * @throws Exception
      */
     public static void conectarse(String dbName, String user, String pass) throws Exception {
-      
+
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conexion = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/" + dbName, user, pass);
@@ -39,8 +41,19 @@ public class BBDD {
             Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "NO e ha iniciado la conexión");
         }
-        st=(Statement) conexion.createStatement();
-        
+        st = (Statement) conexion.createStatement();
+
     }
 
+    /**
+     * Este método cierra la conexión a la base de datos
+     */
+    public static void cerrarConexion() {
+        try {
+            conexion.close();
+            JOptionPane.showMessageDialog(null, "Se ha finalizado la conexión con el servidor");
+        } catch (SQLException ex) {
+            Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
