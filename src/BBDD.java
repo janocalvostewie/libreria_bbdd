@@ -61,5 +61,34 @@ public class BBDD {
             Logger.getLogger(BBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    /*
+    *Inserta en la BBDD unos valores que habrán de definirse más adelante.
+    Se le pasa como parámetro la tabla con la que queremos trabjar.
+    */
+    public static void insertDatos(String tabla) throws SQLException{
+        PreparedStatement pst;
+    pst = conexion.prepareStatement("INSERT INTO "+tabla+" VALUES (?,?,?,?,?)");
+    pst.executeUpdate();
+    
+    }
+    /*
+    *Actualiza los datos de una tabla elegida, un campo elegido con un valor deseado, poniendo una condición al campo.
+    */
+     public static void updateDatos(String tabla, String campo, String valor, String condicion) throws SQLException{
+        PreparedStatement pst;
+    pst = conexion.prepareStatement("update "+tabla+" set "+campo+"=\""+valor+"\" where "+campo+"=\""+condicion+"\";");
+    pst.executeUpdate();
+    
+    }
+     /*
+     *Borramos de una tabla los datops que cumplan la condición que se pasa como parámetro
+     */
+       public static void deleteDatos(String tabla, String campo, String condicion) throws SQLException{
+        PreparedStatement pst;
+    pst = conexion.prepareStatement("delete from "+tabla+" where "+campo+"=\""+condicion+"\";");
+    pst.executeUpdate();
+    
+    }
+     
    
 }
